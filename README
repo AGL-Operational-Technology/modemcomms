@@ -15,4 +15,22 @@ apt-get install perl
 cpan install Device::Modem
 cpan install Device::Gsm 
 
+//launch on boot
+sudo cp /home/fledge/modemcomms/bin/modemcomms.sh /etc/init.d/
+cd /etc/init.Device
+sudo nano modemcomms.sh
+///////add at top /////////
+# /etc/init.d/modemcomms.sh
+### BEGIN INIT INFO
+# Provides:          modemcomms.sh
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start daemon at boot time
+# Description:       Enable service provided by daemon.
+### END INIT INFO
+////////////////////
 
+sudo chmod +x modemcomms.sh
+sudo update-rc.d modemcomms.sh defaults
