@@ -1,0 +1,18 @@
+
+Included Files and locations :
+
+/usr/local/bin/modemcomms.sh
+/usr/local/bin/modemRegState.pl
+/usr/local/bin/modemSigLevel.pl
+/etc/network/interfaces.d/wwan0
+/etc/sim.conf
+/etc/qmi-network.conf
+
+
+perl scripts require the following installed
+
+apt-get install perl
+cpan install Device::Modem
+cpan install Device::Gsm 
+
+
