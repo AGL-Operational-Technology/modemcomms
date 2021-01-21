@@ -1,12 +1,16 @@
-# Provides:          modemcomms.sh
+#!/bin/bash
+#//etc/init.d/modemcomms.sh
+
+### BEGIN INIT INFO
+# Provides:          modemcomms
 # Required-Start:    $remote_fs $syslog
 # Required-Stop:     $remote_fs $syslog
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Short-Description: Start daemon at boot time
-# Description:       Enable service provided by daemon.
-#!/bin/bash
-#
+# Short-Description: Simple script to start a program at boot
+# Description:       A simple script from www.stuffaboutcode.com which will start / stop a program a boot / shutdown.
+### END INIT INFO
+
 # QMI Modem Comms Script  - embeddedpi.com
 #
 # Release : 09/04/2018
@@ -29,19 +33,19 @@
 # /home/fledge/modemcomms/bin/modemRegState.pl
 #
 # /etc/network/interfaces.d/wwan0 :
-#iface wwan0 inet dhcp
-#       pre-up for _ in $(seq 1 10); do /usr/bin/test -c /dev/cdc-wdm0 && break; /bin/sleep 1; done
-#       pre-up for _ in $(seq 1 10); do /usr/bin/qmicli -d /dev/cdc-wdm0 --nas-get-signal-strength && break; /bin/sleep 1; done
-#       pre-up /usr/bin/qmicli -d /dev/cdc-wdm0 --wda-set-data-format=802-3
-#       pre-up /usr/bin/qmi-network /dev/cdc-wdm0 start
-#       post-down /usr/bin/qmi-network /dev/cdc-wdm0 stop
-#
+#iface wwan0 inet manual
+#     pre-up ifconfig wwan0 down
+#     pre-up for _ in $(seq 1 10); do /usr/bin/test -c /dev/cdc-wdm0 && break; /bin/sleep 1; done
+#     pre-up for _ in $(seq 1 10); do /usr/bin/qmicli -d /dev/cdc-wdm0 --nas-get-signal-strength && break; /bin/sleep 1; done
+#     pre-up /usr/local/bin/qmi-network-raw /dev/cdc-wdm0 start
+#     pre-up udhcpc -i wwan0
+#     post-down /usr/local/bin/qmi-network-raw /dev/cdc-wdm0 stop
 #
 # /home/fledge/modemcomms/etc/sim.conf :
 #SIMPIN=1234
 #
 #/home/fledge/modemcomms/etc/qmi-network.conf :
-#APN=pp.vodafone.co.uk
+#APN=telstra.wap
 #
 #
 
@@ -156,7 +160,7 @@ function networkConnect
                 then
                         echo "Modem communications: Resetting Modem..."
                         # If this fails you could also toggle the modem hardware reset line via LK12+GPIO23
-                        /usr/local/bin/modemSoftReset.pl
+                        /home/fledge/modemcomms/bin/modemSoftReset.pl
                         sleep 30
                         return 1
                 fi
