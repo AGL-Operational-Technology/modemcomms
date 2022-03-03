@@ -1,8 +1,8 @@
 Included Files and locations :
 
-cp ~/modemcomms/etc/qmi-network.conf /etc/network/interfaces.d/wwan0
-cp ~/modemcomms/etc/qmi-network.conf /etc/qmi-network.conf
-cp ~/modemcomms/bin/qmi-network-raw /usr/local/bin/qmi-network-raw
+sudo cp ~/modemcomms/etc/network/interfaces.d/wwan0 /etc/network/interfaces.d/wwan0
+sudo cp ~/modemcomms/etc/qmi-network.conf /etc/qmi-network.conf
+sudo cp ~/modemcomms/bin/qmi-network-raw /usr/local/bin/qmi-network-raw
 
 //launch on boot
 sudo cp ~/modemcomms/bin/modemcomms.sh /etc/init.d/
