@@ -15,4 +15,4 @@ cd modemcomms/
 ``` 
 sudo ./run.sh
 ```
-** run as sudo **
+**run as sudo**
